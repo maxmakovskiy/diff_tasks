@@ -42,7 +42,6 @@ func rearrange(s string, lOfOne int) (rearranged string) {
 	return
 }
 
-// TODO: REVIEW
 func getChunkz(s string, lOfOne int) []string {
 	rearrangedString := rearrange(s, lOfOne)
 	fmt.Printf("rearrangedString = %s -> len = %d\n", rearrangedString, len(rearrangedString))
@@ -52,24 +51,27 @@ func getChunkz(s string, lOfOne int) []string {
 
 	chunkz := make([]string, numOfChunkz)
 
+	// zxczxc - 6
+	//
+	// l = 3
+
+	var counter, iterator int
 	var chunk string
-	var counter int
-	var iterator int
-	for _, char := range rearrangedString {
+	for pos, char := range rearrangedString {
 		if counter < lOfOne {
 			chunk += string(char)
 			counter++
-			continue
+			if pos != len(rearrangedString)-1 {
+				continue
+			}
 		}
 		chunkz[iterator] = chunk
-		iterator++
-		counter = 0
-		//chunk = ""
+		counter = 1
 		chunk = string(char)
-
-		//if iterator > num
-
-		fmt.Printf(" -- CHUNKZ %v\n", chunkz)
+		iterator++
+		if iterator == numOfChunkz {
+			break
+		}
 	}
 
 	return chunkz
@@ -82,7 +84,19 @@ func Revrot(s string, n int) string {
 func main() {
 	src1 := "123456987654"
 	lOfChunk1 := 6
-	fmt.Printf("SOURCE: %s\nLEN of SOURCE: %d\nLEN of ONE: %d\nRESULT: %v\n", src1, len(src1), lOfChunk1, getChunkz(src1, lOfChunk1))
+	fmt.Printf("SOURCE: %s\nLEN of SOURCE: %d\nLEN of ONE: %d\nRESULT: %v\n\n", src1, len(src1), lOfChunk1, getChunkz(src1, lOfChunk1))
+
+	src2 := "66443875"
+	lOfChunk2 := 4
+	fmt.Printf("SOURCE: %s\nLEN of SOURCE: %d\nLEN of ONE: %d\nRESULT: %v\n\n", src2, len(src2), lOfChunk2, getChunkz(src2, lOfChunk2))
+
+	src3 := "66443875"
+	lOfChunk3 := 8
+	fmt.Printf("SOURCE: %s\nLEN of SOURCE: %d\nLEN of ONE: %d\nRESULT: %v\n\n", src3, len(src3), lOfChunk3, getChunkz(src3, lOfChunk3))
+
+	src4 := "563000655734469485"
+	lOfChunk4 := 2
+	fmt.Printf("SOURCE: %s\nLEN of SOURCE: %d\nLEN of ONE: %d\nRESULT: %v\n\n", src4, len(src4), lOfChunk4, getChunkz(src4, lOfChunk4))
 
 	/*
 		src2 := "66443875"
