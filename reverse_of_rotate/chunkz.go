@@ -36,7 +36,7 @@ func rearrange(s string, lOfOne int) (rearranged string) {
 		rearranged = rearrangeEven(s, lOfOne)
 	} else {
 		temp := makeEven(s)
-		fmt.Printf("makeEven(%s) = %s -> len(%s) = %d \n", s, temp, temp, len(temp))
+		// fmt.Printf("makeEven(%s) = %s -> len(%s) = %d \n", s, temp, temp, len(temp))
 		rearranged = rearrangeEven(temp, lOfOne)
 	}
 
@@ -45,16 +45,12 @@ func rearrange(s string, lOfOne int) (rearranged string) {
 
 func getChunkz(s string, lOfOne int) []string {
 	rearrangedString := rearrange(s, lOfOne)
-	fmt.Printf("rearrangedString = %s -> len = %d\n", rearrangedString, len(rearrangedString))
+	// fmt.Printf("rearrangedString = %s -> len = %d\n", rearrangedString, len(rearrangedString))
 
 	numOfChunkz := len(rearrangedString) / lOfOne
-	fmt.Printf("number of chunkz -> %d\n", numOfChunkz)
+	// fmt.Printf("number of chunkz -> %d\n", numOfChunkz)
 
 	chunkz := make([]string, numOfChunkz)
-
-	// zxczxc - 6
-	//
-	// l = 3
 
 	var counter, iterator int
 	var chunk string
@@ -105,47 +101,53 @@ func isSumOfCubesDivisibleByTwo(num string) bool {
 }
 
 func Revrot(s string, n int) (res string) {
-	//	chunkz := getChunkz(s, n)
+	chunkz := getChunkz(s, n)
 
-	/*
-		for _, v := range chunkz {
-
-
+	for _, v := range chunkz {
+		if isSumOfCubesDivisibleByTwo(v) {
+			res += v
+		} else {
+			res += rotateToLeftByOne(v)
 		}
-	*/
+	}
 
-	res = "HELLO"
 	return
 }
 
 func main() {
-	src1 := "123456987654"
-	lOfChunk1 := 6
-	fmt.Printf("SOURCE: %s\nLEN of SOURCE: %d\nLEN of ONE: %d\nRESULT: %v\n\n", src1, len(src1), lOfChunk1, getChunkz(src1, lOfChunk1))
-
-	src2 := "66443875"
-	lOfChunk2 := 4
-	fmt.Printf("SOURCE: %s\nLEN of SOURCE: %d\nLEN of ONE: %d\nRESULT: %v\n\n", src2, len(src2), lOfChunk2, getChunkz(src2, lOfChunk2))
-
-	src3 := "66443875"
-	lOfChunk3 := 8
-	fmt.Printf("SOURCE: %s\nLEN of SOURCE: %d\nLEN of ONE: %d\nRESULT: %v\n\n", src3, len(src3), lOfChunk3, getChunkz(src3, lOfChunk3))
-
-	src4 := "563000655734469485"
-	lOfChunk4 := 2
-	fmt.Printf("SOURCE: %s\nLEN of SOURCE: %d\nLEN of ONE: %d\nRESULT: %v\n\n", src4, len(src4), lOfChunk4, getChunkz(src4, lOfChunk4))
-
 	/*
+		src1 := "123456987654"
+		lOfChunk1 := 6
+		fmt.Printf("SOURCE: %s\nLEN of SOURCE: %d\nLEN of ONE: %d\nRESULT: %v\n\n", src1, len(src1), lOfChunk1, getChunkz(src1, lOfChunk1))
+
 		src2 := "66443875"
 		lOfChunk2 := 4
-		fmt.Printf("SOURCE: %s\nLEN of ONE: %d\nRESULT: %v\n", src2, lOfChunk2, getChunkz(src2, lOfChunk2))
+		fmt.Printf("SOURCE: %s\nLEN of SOURCE: %d\nLEN of ONE: %d\nRESULT: %v\n\n", src2, len(src2), lOfChunk2, getChunkz(src2, lOfChunk2))
 
 		src3 := "66443875"
 		lOfChunk3 := 8
-		fmt.Printf("SOURCE: %s\nLEN of ONE: %d\nRESULT: %v\n", src3, lOfChunk3, getChunkz(src3, lOfChunk3))
+		fmt.Printf("SOURCE: %s\nLEN of SOURCE: %d\nLEN of ONE: %d\nRESULT: %v\n\n", src3, len(src3), lOfChunk3, getChunkz(src3, lOfChunk3))
 
 		src4 := "563000655734469485"
 		lOfChunk4 := 2
-		fmt.Printf("SOURCE: %s\nLEN of ONE: %d\nRESULT: %v\n", src4, lOfChunk4, getChunkz(src4, lOfChunk4))
+		fmt.Printf("SOURCE: %s\nLEN of SOURCE: %d\nLEN of ONE: %d\nRESULT: %v\n\n", src4, len(src4), lOfChunk4, getChunkz(src4, lOfChunk4))
 	*/
+
+	src1 := "123456987654"
+	lOfChunk1 := 6
+	fmt.Printf("SOURCE: %s\n --> RESULT: %v\n\n", src1, Revrot(src1, lOfChunk1))
+
+	src2 := "66443875"
+	lOfChunk2 := 4
+	fmt.Printf("SOURCE: %s\n --> RESULT: %v\n\n", src2, Revrot(src2, lOfChunk2))
+
+	src3 := "123456779"
+	lOfChunk3 := 8
+	fmt.Printf("SOURCE: %s\n --> RESULT: %v\n\n", src3, Revrot(src3, lOfChunk3))
+
+	// TODO: REVIEW -> WRONG RESULT
+	src4 := "563000655734469485"
+	lOfChunk4 := 4
+	fmt.Printf("SOURCE: %s\n --> RESULT: %v\n\n", src4, Revrot(src4, lOfChunk4))
+
 }
