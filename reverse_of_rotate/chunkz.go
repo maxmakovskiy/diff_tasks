@@ -78,9 +78,9 @@ func getChunkz(s string, lOfOne int) []string {
 	return chunkz
 }
 
-func rotateToLeftByOn(num string) (res string) {
-
-	res = "false"
+func rotateToLeftByOne(num string) (res string) {
+	res = num[1:]
+	res += string(num[0])
 	return
 }
 
