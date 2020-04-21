@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 func isEven(s string) bool {
@@ -77,8 +78,44 @@ func getChunkz(s string, lOfOne int) []string {
 	return chunkz
 }
 
-func Revrot(s string, n int) string {
-	return "HELLO"
+func rotateToLeftByOn(num string) (res string) {
+
+	res = "false"
+	return
+}
+
+func isSumOfCubesDivisibleByTwo(num string) bool {
+	digits := make([]int, len(num))
+
+	for pos, digit := range num {
+		digits[pos] = int(digit)
+	}
+
+	var temp float64
+
+	for _, digit := range digits {
+		temp += math.Pow(float64(digit), 3)
+	}
+
+	if (int(temp) % 2) == 0 {
+		return true
+	}
+
+	return false
+}
+
+func Revrot(s string, n int) (res string) {
+	//	chunkz := getChunkz(s, n)
+
+	/*
+		for _, v := range chunkz {
+
+
+		}
+	*/
+
+	res = "HELLO"
+	return
 }
 
 func main() {
