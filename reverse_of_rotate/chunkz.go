@@ -115,7 +115,7 @@ func Revrot(s string, n int) (res string) {
 
 	for _, v := range chunkz {
 		if isSumOfCubesDivisibleByTwo(v) {
-			res += v
+			res += reverse(v)
 		} else {
 			res += rotateToLeftByOne(v)
 		}
