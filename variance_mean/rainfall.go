@@ -50,7 +50,7 @@ func retrieveValues(source string) []string {
 	return re.FindAllString(source, -1)
 }
 
-func getTemperatureByMonth(source string) map[string]float64 {
+func getTemperatureByMonths(source string) map[string]float64 {
 	re := regexp.MustCompile(":([0-9A-Za-z_]*[^0-9A-Za-z_]*)*")
 	temp := (re.FindString(source))[1:]
 
@@ -75,7 +75,7 @@ func getTemperatureByMonth(source string) map[string]float64 {
 
 func Variance(town string, raw string) float64 {
 	source := pickTheRightString(town, raw)
-	data := getTemperatureByMonth(source)
+	data := getTemperatureByMonths(source)
 
 	var numerator float64
 	var denominator float64 = float64(len(data))
@@ -83,13 +83,19 @@ func Variance(town string, raw string) float64 {
 		numerator += math.Pow(v, 2)
 	}
 
-	result := numerator / denominator
-
-	return result
+	return numerator / denominator
 }
 
-func Mean(town string, data string) float64 {
-	return 0.0
+func Mean(town string, raw string) float64 {
+	data := getTemperatureByMonths(pickTheRightString(town, raw))
+
+	var numerator float64
+	var denomirator float64 = float64(len(data))
+	for _, v := range data {
+		numerator += v
+	}
+
+	return numerator / denomirator
 }
 
 func main() {
@@ -105,12 +111,7 @@ func main() {
   Beijing:Jan 3.9,Feb 4.7,Mar 8.2,Apr 18.4,May 33.0,Jun 78.1,Jul 224.3,Aug 170.0,Sep 58.4,Oct 18.0,Nov 9.3,Dec 2.7
   Lima:Jan 1.2,Feb 0.9,Mar 0.7,Apr 0.4,May 0.6,Jun 1.8,Jul 4.4,Aug 3.1,Sep 3.3,Oct 1.7,Nov 0.5,Dec 0`
 
-	//re := regexp.MustCompile(":([0-9A-Za-z_]*[^0-9A-Za-z_]*)*")
-
 	var town string = "London"
-	/*for _, k := range strings.Split(data, "\n") {
-		fmt.Printf("BEGIN <<%#v>> END\n", re.FindString(strings.TrimSpace(k))[1:])
-	}*/
 
-	fmt.Printf("Variance %f \n", Variance(town, data))
+	fmt.Printf("Variance %f \nMean %f\n", Variance(town, data), Mean(town, data))
 }
