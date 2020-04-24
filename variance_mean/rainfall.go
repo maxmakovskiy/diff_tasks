@@ -73,19 +73,6 @@ func getTemperatureByMonths(source string) map[string]float64 {
 	return result
 }
 
-func Variance(town string, raw string) float64 {
-	source := pickTheRightString(town, raw)
-	data := getTemperatureByMonths(source)
-
-	var numerator float64
-	var denominator float64 = float64(len(data))
-	for _, v := range data {
-		numerator += math.Pow(v, 2)
-	}
-
-	return numerator / denominator
-}
-
 func Mean(town string, raw string) float64 {
 	data := getTemperatureByMonths(pickTheRightString(town, raw))
 
@@ -96,6 +83,20 @@ func Mean(town string, raw string) float64 {
 	}
 
 	return numerator / denomirator
+}
+
+func Variance(town string, raw string) float64 {
+	source := pickTheRightString(town, raw)
+	data := getTemperatureByMonths(source)
+	avg := Mean(town, raw)
+
+	var numerator float64
+	var denominator float64 = float64(len(data))
+	for _, v := range data {
+		numerator += math.Pow((avg - v), 2)
+	}
+
+	return numerator / denominator
 }
 
 func main() {
