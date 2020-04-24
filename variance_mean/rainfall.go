@@ -2,9 +2,22 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"regexp"
+	"strconv"
 	"strings"
 )
+
+func splitDataByStrings(data string) []string {
+	temp := strings.Split(data, "\n")
+	res := make([]string, len(temp))
+
+	for i, k := range temp {
+		res[i] = strings.TrimSpace(k)
+	}
+
+	return res
+}
 
 func pickTheRightString(town string, data string) string {
 	temp := splitDataByStrings(data)
@@ -20,20 +33,59 @@ func pickTheRightString(town string, data string) string {
 	return "FALSE"
 }
 
-func splitDataByStrings(data string) []string {
-	temp := strings.Split(data, "\n")
-	res := make([]string, len(temp))
-
-	for i, k := range temp {
-		res[i] = strings.TrimSpace(k)
-	}
-
-	return res
+func retrieveMonths(source string) []string {
+	re := regexp.MustCompile("[A-Z][a-z][a-z]")
+	return re.FindAllString(source, -1)
 }
 
-func Variance(town string, data string) float64 {
+/*
+func getBatchesOf(source string) []string {
+	re := regexp.MustCompile("[A-Z][a-z][a-z][\t\n\f\r ][0-9]*[^\t\n\f\r ][0-9]*")
+	return re.FindAllString(source, -1)
+}
+*/
 
-	return 0.0
+func retrieveValues(source string) []string {
+	re := regexp.MustCompile("[\t\n\f\r ][0-9]*[^\t\n\f\r ][0-9]*")
+	return re.FindAllString(source, -1)
+}
+
+func getTemperatureByMonth(source string) map[string]float64 {
+	re := regexp.MustCompile(":([0-9A-Za-z_]*[^0-9A-Za-z_]*)*")
+	temp := (re.FindString(source))[1:]
+
+	result := make(map[string]float64)
+
+	months := retrieveMonths(temp)
+	values := retrieveValues(temp)
+
+	if len(months) != len(values) {
+		return result
+	}
+
+	for i := 0; i < len(months); i++ {
+		tVal, err := strconv.ParseFloat((values[i])[1:], 64)
+		if err == nil {
+			result[months[i]] = tVal
+		}
+	}
+
+	return result
+}
+
+func Variance(town string, raw string) float64 {
+	source := pickTheRightString(town, raw)
+	data := getTemperatureByMonth(source)
+
+	var numerator float64
+	var denominator float64 = float64(len(data))
+	for _, v := range data {
+		numerator += math.Pow(v, 2)
+	}
+
+	result := numerator / denominator
+
+	return result
 }
 
 func main() {
@@ -56,5 +108,5 @@ func main() {
 		fmt.Printf("BEGIN <<%#v>> END\n", re.FindString(strings.TrimSpace(k))[1:])
 	}*/
 
-	fmt.Println(pickTheRightString(town, data))
+	fmt.Printf("Variance %f \n", Variance(town, data))
 }
