@@ -20,12 +20,31 @@ bool isPerfectSquare(long int sq)
 // A perfect square is a number that can be expressed as the product of two equal integers.
 long int findNextSquare(long int sq) 
 {
-	return -1;
+	if (!isPerfectSquare(sq))
+	{
+		return -1;
+	}
+	else
+	{
+		sq++;
+
+		while (1)
+		{
+			if (isPerfectSquare(sq))
+			{
+				return sq;
+			}
+			sq++;
+		}
+	}
 }
 
 int main()
 {
-	std::cout << isPerfectSquare(9) << std::endl;
+	std::cout << findNextSquare(9) << std::endl;
+	std::cout << findNextSquare(625) << std::endl;
+	std::cout << findNextSquare(121) << std::endl;
+	std::cout << findNextSquare(114) << std::endl;
 	std::cin.get();
 
 	return 0;
