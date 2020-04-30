@@ -1,5 +1,6 @@
 #include <iostream>
 
+
 // The parity of a binary word is 1 
 // if the number of 1s in the word is odd;
 // otherwise, it is 0.
@@ -51,7 +52,6 @@ int main()
 
 	std::cout << "The parity of " << a << " is " << parity(a) << std::endl;
 	std::cout << "The parity of " << b << " is " << parity(b) << std::endl;
-
 	
 	
 	std::cin.get();
