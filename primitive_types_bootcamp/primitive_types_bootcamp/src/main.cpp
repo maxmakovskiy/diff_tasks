@@ -1,5 +1,25 @@
 #include <iostream>
 
+// The parity of a binary word is 1 
+// if the number of 1s in the word is odd;
+// otherwise, it is 0.
+short parity(unsigned long a)
+{ 
+	// a = 0111
+	short result = 0;
+
+	while (a)
+	{
+		// 0111 & 0001 = 0001
+		// 0001 ^ 0000 = 0001
+		result ^= (a & 1);
+		// 0111 >> 1 = 0011 
+		a >>= 1;
+		// and so on
+	}
+
+	return result;
+}
 
 short countBits(unsigned long a)
 {
@@ -21,13 +41,17 @@ short countBits(unsigned long a)
 int main()
 {
 	unsigned long a = 5; // 1001
+	unsigned long b = 7; // 0111 
+
+
 	std::cout << "Num of bist in " << a << " -> " << countBits(a) << std::endl;
-	
-	unsigned long b = 15; // 1111
 	std::cout << "Num of bist in " << b << " -> " << countBits(b) << std::endl;
-	
-	
-	
+
+	std::cout << "\n==========================================\n" << std::endl;
+
+	std::cout << "The parity of " << a << " is " << parity(a) << std::endl;
+	std::cout << "The parity of " << b << " is " << parity(b) << std::endl;
+
 	
 	
 	std::cin.get();
