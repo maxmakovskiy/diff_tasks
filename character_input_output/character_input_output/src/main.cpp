@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 
 void copyInputToOutput()
@@ -46,9 +47,9 @@ int main()
 	printf("Number of characters from input: %d", count); */
 
 	int count = countLines();
-	printf("Num of lines from given input: %d", count);
+	printf("Num of lines from given input: %d\n", count);
 	getchar();
 
-	getchar();
+	system("pause");
 	return 0;
 }
