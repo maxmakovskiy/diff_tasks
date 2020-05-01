@@ -105,6 +105,23 @@ int countWords()
 	return numOfWords;
 }
 
+void wordPerLine()
+{
+	int c;
+
+	while ((c = getchar()) != EOF)
+	{
+		if (c == ' ' || c == '\n' || c == '\t')
+		{
+			putchar('\n');
+		}
+		else
+		{
+			putchar(c);
+		}
+	}
+}
+
 int main()
 {
 // 	copyInputToOutput();
@@ -121,8 +138,10 @@ int main()
 
 //	replaceMultiBlankToSingle();
 
-	int count = countWords();
-	printf("Num of words from given input: %d\n", count);
+/*	int count = countWords();
+	printf("Num of words from given input: %d\n", count); */
+
+	wordPerLine();
 	
 
 	system("pause");
