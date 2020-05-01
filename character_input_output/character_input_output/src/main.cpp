@@ -21,13 +21,33 @@ int countCharacters()
 	return numOfChars;
 }
 
+int countLines()
+{
+	int numOfLines = 0;
+	int c;
+
+//	while ((c = getchar()) != EOF)
+	while ((c = getchar()) != '-')
+	{
+		if (c == '\n')
+		{
+			++numOfLines;
+		}
+	}
+
+	return numOfLines;
+}
 
 int main()
 {
 // 	copyInputToOutput();
 
-	int count = countCharacters();
-	printf("Number of characters from input: %d", count);
+/*	int count = countCharacters();
+	printf("Number of characters from input: %d", count); */
+
+	int count = countLines();
+	printf("Num of lines from given input: %d", count);
+	getchar();
 
 	getchar();
 	return 0;
