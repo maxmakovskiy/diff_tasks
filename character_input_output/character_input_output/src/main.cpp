@@ -2,6 +2,9 @@
 #include <stdlib.h>
 
 
+#define IN 1
+#define OUT 0
+
 void copyInputToOutput()
 {
 	int c;
@@ -79,6 +82,29 @@ void replaceMultiBlankToSingle()
 	}
 }
 
+int countWords()
+{
+	int c;
+	int numOfWords = 0;
+	int state = OUT;
+
+	while ((c = getchar()) != EOF)
+	{
+		if (c == ' ' || c == '\n' || c == '\t')
+		{
+			state = OUT;
+		}
+		else if (state == OUT)
+		{
+			state = IN;
+			numOfWords++;
+		}
+
+	}
+
+	return numOfWords;
+}
+
 int main()
 {
 // 	copyInputToOutput();
@@ -93,9 +119,11 @@ int main()
 /*	int* counterp = countLinesBlanksTabs();
 	printf("Num of lines %d\nNum of tabs %d\nNum of blanks %d\n", *counterp, *(counterp + 1), *(counterp + 2));*/
 
-	replaceMultiBlankToSingle();
+//	replaceMultiBlankToSingle();
 
-
+	int count = countWords();
+	printf("Num of words from given input: %d\n", count);
+	
 
 	system("pause");
 	return 0;
