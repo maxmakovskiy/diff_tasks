@@ -63,6 +63,22 @@ int countLines()
 	return numOfLines;
 }
 
+void replaceMultiBlankToSingle()
+{
+	int curr = 0;
+	int prev = 0;
+
+	for (; (curr = getchar()) != EOF; prev = curr)
+	{
+		if (curr == ' ' && prev == ' ')
+		{
+			continue;
+		}
+
+		putchar(curr);
+	}
+}
+
 int main()
 {
 // 	copyInputToOutput();
@@ -74,8 +90,10 @@ int main()
 	printf("Num of lines from given input: %d\n", count);
 	getchar();*/
 
-	int* counterp = countLinesBlanksTabs();
-	printf("Num of lines %d\nNum of tabs %d\nNum of blanks %d\n", *counterp, *(counterp + 1), *(counterp + 2));
+/*	int* counterp = countLinesBlanksTabs();
+	printf("Num of lines %d\nNum of tabs %d\nNum of blanks %d\n", *counterp, *(counterp + 1), *(counterp + 2));*/
+
+	replaceMultiBlankToSingle();
 
 
 
