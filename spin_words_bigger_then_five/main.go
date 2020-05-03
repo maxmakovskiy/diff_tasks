@@ -24,13 +24,13 @@ func SpinWords(str string) string {
 	temp := strings.Split(str, " ")
 	for i, v := range temp {
 		if (v == " ") || (len(v) < 5) {
-			if i != len(temp) {
+			if i != (len(temp) - 1) {
 				result += (v + " ")
 			} else {
 				result += v
 			}
 		} else {
-			if i != len(temp) {
+			if i != (len(temp) - 1) {
 				result += (reverse(v) + " ")
 			} else {
 				result += reverse(v)
@@ -42,6 +42,8 @@ func SpinWords(str string) string {
 }
 
 func main() {
-	str := "Hi pizza"
+	//	str := "Hi pizza"
+	//	str := "emocleW"
+	str := "Hey wollef sroirraw"
 	fmt.Println(SpinWords(str)) // expected "Hi azzip"
 }
