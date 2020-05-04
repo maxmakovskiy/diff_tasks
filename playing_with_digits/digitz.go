@@ -37,7 +37,7 @@ func getDigits(num int) []int {
 // k = temp/n
 // if k is int -> return k
 // else return -1
-func digitPow(n, p int) int {
+func DigitPow(n, p int) int {
 	digits := getDigits(n)
 
 	var temp int
@@ -48,7 +48,7 @@ func digitPow(n, p int) int {
 	}
 
 	var k interface{} = temp / n
-	if valOfK, ok := k.(int); ok {
+	if valOfK, _ := k.(int); valOfK != 0 {
 		return valOfK
 	}
 
@@ -56,8 +56,7 @@ func digitPow(n, p int) int {
 }
 
 func main() {
-	n := 89
+	n := 92
 	p := 1
-	//	fmt.Printf("Input = %d; getDigits() = %v\n", src, getDigits(src))
-	fmt.Printf("Input = %d; digPow = %d\n", n, digitPow(n, p))
+	fmt.Printf("Input = %d; digPow = %d\n", n, DigitPow(n, p))
 }
