@@ -7,10 +7,15 @@ import (
 
 func alphanumeric(str string) bool {
 	sourceArray := strings.Split(str, "")
-	re := regexp.MustCompile("0-9A-Za-z_")
+	re := regexp.MustCompile("([0-9]|[A-Z]|[a-z])+")
+
+	if len(sourceArray) == 0 {
+		return false
+	}
 
 	for _, v := range sourceArray {
-		if !re.MatchString(sourceArray) {
+		temp := re.MatchString(v)
+		if !temp {
 			return false
 		}
 	}
