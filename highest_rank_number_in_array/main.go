@@ -10,10 +10,20 @@ func countingNums(nums []int) map[int]int {
 	return result
 }
 
+func biggerValue(src map[int]int) (key int) {
+	var val int
+	for k, v := range src {
+		if v > val {
+			val = v
+			key = k
+		}
+	}
+	return
+}
+
 // HighestRank - returns the number which is most frequent in given slice
 func HighestRank(nums []int) int {
 	temp := countingNums(nums)
-	indexOflast := len(nums) - 1
-
-	return temp[nums[indexOflast]]
+	val := biggerValue(temp)
+	return val
 }
