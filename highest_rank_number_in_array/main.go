@@ -21,7 +21,9 @@ func keyByBiggerVal(src map[int]int) (key int) {
 	return
 }
 
-// HighestRank - returns the number which is most frequent in given slice
+// HighestRank - returns the number which is most frequent in given slice.
+// If there is a tie for most frequent number,
+// return the largest number among them.
 func HighestRank(nums []int) int {
 	temp := countingNums(nums)
 	val := keyByBiggerVal(temp)
